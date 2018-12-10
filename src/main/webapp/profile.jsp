@@ -3,8 +3,12 @@
 
 <%--Profile Page!--%>
 <html>
-<jsp:include page="HeadTag.jsp"/>
+<jsp:include page="partials/HeadTag.jsp"/>
 <body>
-    <h1> Welcome to your profile, ${username}!</h1>
+    <jsp:include page="partials/Nav.jsp"/>
+
+    <h1> Welcome to your profile!</h1>
+
+    <jsp:include page="partials/footer.jsp"/>
 </body>
 </html>
