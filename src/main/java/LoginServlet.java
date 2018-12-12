@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 
         if (validAttempt) {
             ses.setAttribute("user", true);
+            ses.setAttribute("username", username);
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
