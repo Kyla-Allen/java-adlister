@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         if(user){
             response.sendRedirect("/profile");
         } else {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
 
