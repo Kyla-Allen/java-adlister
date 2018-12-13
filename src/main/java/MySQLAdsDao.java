@@ -1,10 +1,8 @@
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.DriverManager;
-import com.mysql.cj.jdbc.Driver;
-import com.sun.javafx.binding.StringFormatter;
+
 
 public class MySQLAdsDao implements Ads {
 
@@ -42,6 +40,7 @@ public class MySQLAdsDao implements Ads {
                         resultSet.getString("title"),
                         resultSet.getString("description")
                 );
+                results.add(adToInsert);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +62,7 @@ public class MySQLAdsDao implements Ads {
             String title = ad.getTitle();
             String desc = ad.getDescription();
             //Making the Query
-            String query = String.format("INSERT into ads VALUES (user_id, title, description)" +
+            String query = String.format("INSERT into ads (user_id, title, description)" +
                     "VALUES (%d, '%s', '%s')", user_id, title, desc);
             //Running Query
             stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
@@ -83,6 +82,14 @@ public class MySQLAdsDao implements Ads {
 
 //    FOR TESTING PURPOSES
 public static void main(String[] args) {
+
+         Config config = new Config();
+         MySQLAdsDao mySQLAdsDao = new MySQLAdsDao(config);
+
+//         Ad ad = new Ad(2, "Title", "Blah Blah Blah");
+
+    System.out.println(mySQLAdsDao.all());
+
 
 }
 }
