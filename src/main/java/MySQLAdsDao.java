@@ -1,3 +1,5 @@
+import com.mysql.jdbc.Driver;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,8 @@ public class MySQLAdsDao implements Ads {
 //    Constructor
      MySQLAdsDao(Config config){
         try {
-            this.connection = DriverManager.getConnection(
+            DriverManager.registerDriver(new Driver());
+            connection = DriverManager.getConnection(
                     config.getUrl(),
                     config.getUser(),
                     config.getPassword()
@@ -32,8 +35,6 @@ public class MySQLAdsDao implements Ads {
             ResultSet resultSet = stmt.executeQuery(query);
             //Loop
             while (resultSet.next()){
-                // add a new Ad object to the ads arraylist (results)
-                    // for each resultSet row, extract the values from each column and use them to create a new Ad object to store in the array list
                 Ad adToInsert = new Ad(
                         resultSet.getLong("id"),
                         resultSet.getLong("user_id"),
@@ -80,16 +81,4 @@ public class MySQLAdsDao implements Ads {
     }
 
 
-//    FOR TESTING PURPOSES
-public static void main(String[] args) {
-
-         Config config = new Config();
-         MySQLAdsDao mySQLAdsDao = new MySQLAdsDao(config);
-
-//         Ad ad = new Ad(2, "Title", "Blah Blah Blah");
-
-    System.out.println(mySQLAdsDao.all());
-
-
-}
 }
