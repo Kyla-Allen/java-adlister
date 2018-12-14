@@ -29,8 +29,8 @@ public class MySQLUsersDao implements Users {
             Statement stmt = connection.createStatement();
             String query = "SELECT * from users where username like '%" + username + "%'";
             ResultSet rs = stmt.executeQuery(query);
+            rs.next();
             User userFound = new User(
-                    rs.getLong("id"),
                     rs.getString("username"),
                     rs.getString("email"),
                     rs.getString("password")
@@ -53,6 +53,7 @@ public class MySQLUsersDao implements Users {
 
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating user");

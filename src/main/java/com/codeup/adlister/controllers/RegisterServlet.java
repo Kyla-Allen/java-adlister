@@ -20,8 +20,8 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User newUser = new User(
                 request.getParameter("username"),
-                request.getParameter("password"),
-                request.getParameter("email")
+                request.getParameter("email"),
+                request.getParameter("password")
         );
         DaoFactory.getusersDao().insert(newUser);
         request.getSession().setAttribute("user", newUser);
